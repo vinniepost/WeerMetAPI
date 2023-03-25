@@ -1,15 +1,10 @@
+import Plaatsen as p
 import requests
 import json
 from matplotlib import pyplot
 from datetime import datetime, timedelta
 # Er kunnen meer plaatsen worden aangemaakt
 
-
-class Antwerpen:
-    def __init__(self):
-        self.latitude = 51.22
-        self.longitude = 4.40
-        self.hourly = "temperature_2m"
 
 
 class Data:
@@ -30,8 +25,8 @@ def Init():
 
 
 def ContactServer():
-    lokatie = Antwerpen()
-    url = f"https://api.open-meteo.com/v1/forecast?latitude={lokatie.latitude}&longitude={lokatie.longitude}&hourly={Antwerpen.hourly}"
+    lokatie = p.Antwerpen()
+    url = f"https://api.open-meteo.com/v1/forecast?latitude={lokatie.latitude}&longitude={lokatie.longitude}&hourly={lokatie.hourly}"
     response = requests.get(url)
     if response.status_code == 200:
         data = response.json()
@@ -77,7 +72,6 @@ def Plot():
             currentDayTimes.append(
                 datetime.fromisoformat(time).strftime("%H:%M"))
             currentDayTemperatures.append(hourly["temperature_2m"][i])
-    temperature_2m = hourly["temperature_2m"]
     pyplot.plot(currentDayTimes, currentDayTemperatures,
                 label="Temperatuur", color="red", marker="o", linestyle="dashed")
     pyplot.xticks(range(0, len(currentDayTimes), 1), rotation=45)
