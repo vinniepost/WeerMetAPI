@@ -6,7 +6,6 @@ from datetime import datetime, timedelta
 # Er kunnen meer plaatsen worden aangemaakt
 
 
-
 class Data:
     def __init__(self):
         self.DataLokatie = "Data/data.json"
